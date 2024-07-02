@@ -1,0 +1,241 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram clone </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+    <style>
+        @font-face {
+            font-family: 'Billabong';
+            src: url('Billabong.woff') format('woff');
+        }
+
+        .instagram-text-logo {
+            font-family: 'Billabong', sans-serif;
+            font-size: 35px;
+            background: -webkit-linear-gradient(#fd5949, #d6249f, #285aeb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+<body>
+<div class="container">
+        <!-- starting nav section of instagram -->
+        <nav>
+            <div class="navbar">
+                <div class="instagram-text-logo"  style="width:200px;">
+        InstaCanvas
+    </div>
+                <div class="sub-section">
+                    <i class="fa-solid fa-house" ></i>
+                    <a href="{% url 'web' %}">Home</a>
+                </div>
+                <div class="sub-section" onclick="openSearchModal()">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <a href="#">Search</a>
+                </div>
+
+                <div id="searchModal" class="modal left-panel">
+        <!-- Your search input and other elements -->
+        <form id="searchForm" method="get" action="{% url 'search' %}">
+            <input type="text" placeholder="Search..." name="q" style="border-radius: 50px; width: 250px; height: 50px; margin-left: 20px;margin-top: 30px; background-color: #333; color: white; border: none; padding: 10px;" /><br>
+            <button class="follow-btn" type="submit" onclick="submitSearchForm()" style="width: 120px; height: 50px;
+             margin-left: 80px; margin-bottom: -120px;border-radius:50px;margin-top:20px;">Search</button>
+            <span class="close" onclick="closeModal()">&times;</span>
+        </form>
+</div>
+
+                <div class="sub-section" onclick="openadd()">
+                    <i class="fa-regular fa-compass"></i>
+                    <a href="#">Add Post</a>
+                </div>
+        <div id="addModal" class="modal left-panel">
+        <!-- Your search input and other elements -->
+        <form method="post" action="{% url 'updbs' dataid=request.session.name item=request.session.name %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" class="form-control" id="username" name="username" placeholder="Enter username" style="border-radius: 10%; width: 250px; height: 50px; background-color: #333; color: white; border: none; padding: 10px;" value="{{request.session.name}}" />
+            <input type="file" class="form-control" name="image" style="border-radius: 50px; width: 250px; height: 50px; margin-left: 20px;margin-top: 30px; background-color: #333; color: white; border: none; padding: 10px;" accept="image/*"/>
+            <button class="follow-btn" type="submit" onclick="submitSearchForm()" style="width: 120px; height: 50px;
+             margin-left: 80px; margin-bottom: -120px;border-radius:50px;margin-top:20px;">Add Post</button>
+            <span class="close" onclick="closeadd()">&times;</span>
+        </form>
+        </div>
+
+                <div class="sub-section" onclick="openstatus()">
+                    <i class="fa-solid fa-clapperboard"></i>
+                    <a href="#">Add Status</a>
+                </div>
+
+
+        <div id="addstatus" class="modal left-panel">
+        <!-- Your search input and other elements -->
+        <form method="post" action="{% url 'updbs' dataid=request.session.name item=request.session.name %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" class="form-control" id="" name="username" placeholder="Enter username" style="border-radius: 10%; width: 250px; height: 50px; background-color: #333; color: white; border: none; padding: 10px;" value="{{request.session.name}}" />
+            <input type="file" class="form-control" name="image" style="border-radius: 50px; width: 250px; height: 50px; margin-left: 20px;margin-top: 30px; background-color: #333; color: white; border: none; padding: 10px;" accept="image/*"/>
+            <button class="follow-btn" type="submit" onclick="submitSearchForm()" style="width: 120px; height: 50px;
+             margin-left: 80px; margin-bottom: -120px;border-radius:50px;margin-top:20px;">Add Status</button>
+            <span class="close" onclick="closestatus()">&times;</span>
+        </form>
+        </div>
+
+                <div class="sub-section">
+                    <i class="fa-regular fa-message"></i>
+                    <a href="{% url 'mes' dataid=request.session.name %}">Messages</a>
+                </div>
+                <div class="sub-section" id="hidden2">
+                    <i class="fa-regular fa-heart"></i>
+                    <a href="#">Notification</a>
+                </div>
+                <div class="sub-section" id="hidden1">
+                    <i class="fa-solid fa-square-plus"></i>
+                    <a href="#">Create</a>
+                </div>
+                <div class="sub-section">
+                    <div class="profile-img">
+                        {% if request.session.name == user_object.username %}
+                        <img src="{{user_object.image.url}}" alt="">
+                        {% endif %}
+                    </div>
+                    {% if request.session.name and user_object %}
+                    <a href="{% url 'profile' dataid=request.session.name item=request.session.name %}">Profile</a>
+                {% endif %}
+                </div>
+                <div class="menu-section " id="hidden">
+                    <i class="fa-solid fa-bars"></i>
+                    <a href="{% url 'logout' %}">Logout</a>
+                </div>
+            </div>
+
+        </nav>
+    {% block content %}
+        <div class="middle-section">
+            <div class="post-section">
+                <div class="nav-hidden">
+                    <div class="nav-hidden-logo" id="white-2color">
+                        <img src="https://i.postimg.cc/qMFTcDw1/instagram-text.png" alt="">
+                    </div>
+                   <div class="nav-hide-2">
+                     <i class="fa-regular fa-heart"></i>
+                     <i class="fa-regular fa-paper-plane"></i>
+                   </div>
+                </div>
+
+
+            {% for i in datas %}
+                <div class="post-area">
+                    <div class="post-main">
+                        <div class="post-header">
+                            <div class="post-left-header">
+                             <div class="post-image">
+                                 {% for j in alse %}
+            {% if j.username == i.username %}
+                                 <img src="{{ j.image.url }}" alt="">
+            {% endif %}
+           {% endfor %}
+                             </div>
+                             <p class="post-username">
+                                {{ i.username }}</p>
+                            <i class="fa-solid fa-certificate"></i>
+                             <span class="one-day"> . 1h </span>
+                            </div>
+                            <i class="fa-solid fa-grip-lines"></i>
+                         </div>
+                         <div class="post-main-image">
+                            <img src="{{ i.image.url }}" alt="">
+                         </div>
+                         <div class="post-fotter">
+                            <div class="post-fotter-left">
+                                <i class="fa-regular fa-heart"></i>
+                                <i class="fa-regular fa-message"></i>
+                                <i class="fa-regular fa-paper-plane"></i>
+                            </div>
+                                <i class="fa-regular fa-bookmark"></i>
+                         </div>
+                         <div class="post-description">
+                                <p class="comments"> view all comments</p>
+                         </div>
+                    </div>
+                </div>
+                {% endfor %}
+           </div>
+           <div class="follow-section">
+                <div class="profile-follow profile-foolow-hovering">
+                    <div class="profile-follow-left">
+                        <div class="profile-follow-image">
+                            <img src="{{ user_object.image.url }}" alt="">
+                        </div>
+                        {% if request.session.name and user_object %}
+                        <div class="profile-follow-content">
+                            <p class="profile-id">{{ user_object.place }}</p>
+                            <p class="profile-name">{{ request.session.name }}</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <a href="#" class="follow">switch</a>
+                </div>
+                 <div class="suggestion-follow">
+                    <p class="suggestion">Suggested for you</p>
+                    <a href="#" class="see-all">see all</a>
+                 </div>
+               {% for i in logs %}
+                {% if i.username != request.session.name and i.username not in following_users %}
+                 <a href="{% url 'person' dataid=i.username item=i.username  %}">
+                     <div class="profile-follow profile-foolow-hovering">
+                    <div class="profile-follow-left">
+                        <div class="profile-follow-image">
+                            <img src="{{ i.image.url }}" alt="">
+                        </div>
+                        <div class="profile-follow-content">
+                            <p class="profile-id">{{ i.username }}@123</p>
+                            <p class="profile-name">{{ i.username }}</p>
+                        </div>
+                    </div>
+                    <a href="#" class="follow">follow</a>
+                </div>
+                 </a>
+                   {% endif %}
+                    {% endfor %}
+
+
+                <p class="copyrights"></p>
+           </div>
+        </div>
+
+</div>
+    <script src="{% static 'js/js.js' %}"></script>
+<script>
+
+    function openstatus() {
+        document.getElementById("addstatus").style.display = "block";
+    }
+    function closestatus() {
+        document.getElementById("addstatus").style.display = "none";
+    }
+    function openadd() {
+        document.getElementById("addModal").style.display = "block";
+    }
+       function closeadd() {
+        document.getElementById("addModal").style.display = "none";
+    }
+    function openSearchModal() {
+        var modal = document.getElementById("searchModal");
+        modal.style.display = "block";
+        modal.style.visibility = "visible";
+    }
+
+    function closeModal() {
+    document.getElementById("searchModal").style.display = "none";
+    }
+</script>
+
+{% endblock %}
+
+</body>
+</html>

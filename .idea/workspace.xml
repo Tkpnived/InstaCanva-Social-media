@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c32927ac-a0f9-4904-b7b7-a899260c5295" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social/.idea/social.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social/socialapp/static/css/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social/socialapp/static/js/js.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social/socialapp/templates/insta.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social/socialapp/templates/persons.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social/socialapp/templates/profil.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/social/socialapp/templates/showfollow.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/social/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/social/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social/socialapp/templates/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/social/socialapp/templates/edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social/socialapp/templates/follow.html" beforeDir="false" afterPath="$PROJECT_DIR$/social/socialapp/templates/follow.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social/socialapp/templates/followers.html" beforeDir="false" afterPath="$PROJECT_DIR$/social/socialapp/templates/followers.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social/socialapp/templates/mes.html" beforeDir="false" afterPath="$PROJECT_DIR$/social/socialapp/templates/mes.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social/socialapp/templates/messages.html" beforeDir="false" afterPath="$PROJECT_DIR$/social/socialapp/templates/messages.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social/socialapp/templates/person.html" beforeDir="false" afterPath="$PROJECT_DIR$/social/socialapp/templates/person.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social/socialapp/templates/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/social/socialapp/templates/profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social/socialapp/templates/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/social/socialapp/templates/search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social/socialapp/templates/web.html" beforeDir="false" afterPath="$PROJECT_DIR$/social/socialapp/templates/web.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/social/socialapp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/social/socialapp/views.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="2h53dbTot3YxqhS5uz0BlNZOhNL" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../LibraryProject/libraryproject/libraryapp/templates/indexs.html" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c32927ac-a0f9-4904-b7b7-a899260c5295" name="Changes" comment="" />
+      <created>1716870198981</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1716870198981</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+</project>

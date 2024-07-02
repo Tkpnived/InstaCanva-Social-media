@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+{% extends 'insta.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <style>
+body {
+    background: #D3D3D3;
+    font-family: Arial, sans-serif;
+}
+.main{
+    width:1000px;
+    max-width:300px;
+    }
+
+.container2 {
+    background-color: #333;
+    margin: 20px auto;
+    margin-left:50px;
+    border: 2px solid #fff;
+    max-width: 90%;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    /* Adjust height */
+    height: 100px; /* Set minimum height */
+}
+
+.input2 {
+    height: 40px; /* Adjust input height */
+    border: 2px solid white;
+    border-radius: 50px;
+    background-color: black;
+    font-size: 20px;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    max-width: 500px;
+    margin: 10px 0;
+}
+
+.transparent-button {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    border-radius: 50px;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.header2 {
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-size: 26px;
+    margin: 40px 0;
+}
+
+.header2 img {
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.form-group2 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+    .form-group2 {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .input2,
+    .transparent-button {
+        margin: 0 10px;
+    }
+}
+@media (max-width: 767px) {
+    .container2 {
+        max-height: 100px; /* Mobile view height */
+    }
+}
+@media (min-width: 768px) {
+    .main{
+        margin-left:150px;
+        max-width:900px;
+
+        }
+    .container2 {
+        height: 120px; /* Larger devices height */
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+    </style>
+</head>
+<body>
+<div class="main">
+<div class="header2">
+    {% if request.session.name %}
+        {% if request.session.name and user_object %}
+            <img src="{{user_object.image.url}}" width="30px" height="30px">
+        {% endif %}
+        <h3>{{request.session.name}}</h3>
+    {% endif %}
+</div>
+{% for i in edits %}
+<form method="post" action="{% url 'update_image' dataid=i.username item=i.username %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="container2 form-group2">
+        <h3 style="color: white;">{{request.session.name}}</h3>
+        <input class="input2" type="file" name="image">
+        <button class="transparent-button">Edit</button>
+    </div>
+</form>
+{% endfor %}
+{% for i in edits %}
+<form method="post" action="{% url 'update_profile' dataid=i.username item=i.username %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="container2 form-group2">
+        <h3 style="color: white;">Mobile</h3>
+        <input class="input2" type="text" name="mobile" value="{{i.mobile}}">
+    </div>
+    <div class="container2 form-group2">
+        <h3 style="color: white;">Email</h3>
+        <input class="input2" type="text" name="email" value="{{i.email}}">
+    </div>
+    <div class="container2 form-group2">
+        <h3 style="color: white;">Place</h3>
+        <input class="input2" type="text" name="place" value="{{i.place}}">
+    </div>
+    <div class="container2 form-group2">
+        <button class="transparent-button">Change Profile</button>
+    </div>
+</form>
+
+{% endfor %}
+</div>
+<script>
+
+    function openstatus() {
+        document.getElementById("addstatus").style.display = "block";
+    }
+    function closestatus() {
+        document.getElementById("addstatus").style.display = "none";
+    }
+    function openadd() {
+        document.getElementById("addModal").style.display = "block";
+    }
+       function closeadd() {
+        document.getElementById("addModal").style.display = "none";
+    }
+    function openSearchModal() {
+        var modal = document.getElementById("searchModal");
+        modal.style.display = "block";
+        modal.style.visibility = "visible";
+    }
+
+    function closeModal() {
+    document.getElementById("searchModal").style.display = "none";
+    }
+</script>
+{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+{% extends 'insta.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav>
+            <div class="navbar">
+                <div class="instagram-text-logo">
+                    <img src="https://i.postimg.cc/qMFTcDw1/instagram-text.png" id="white-color" alt="">
+                </div>
+                <div class="sub-section">
+                    <i class="fa-solid fa-house" ></i>
+                    <a href="{% url 'web' %}">Home</a>
+                </div>
+                <div class="sub-section" onclick="openSearchModal()">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <a href="#">Search</a>
+                </div>
+
+                <div id="searchModal" class="modal left-panel">
+        <!-- Your search input and other elements -->
+        <form id="searchForm" method="get" action="{% url 'search' %}">
+            <input type="text" placeholder="Search..." name="q" style="border-radius: 50px; width: 250px; height: 50px; margin-left: 20px;margin-top: 30px; background-color: #333; color: white; border: none; padding: 10px;" /><br>
+            <button class="follow-btn" type="submit" onclick="submitSearchForm()" style="width: 120px; height: 50px;
+             margin-left: 80px; margin-bottom: -120px;border-radius:50px;margin-top:20px;">Search</button>
+            <span class="close" onclick="closeModal()">&times;</span>
+        </form>
+</div>
+
+                <div class="sub-section" onclick="openadd()">
+                    <i class="fa-regular fa-compass"></i>
+                    <a href="#">Add Post</a>
+                </div>
+        <div id="addModal" class="modal left-panel">
+        <!-- Your search input and other elements -->
+        <form method="post" action="{% url 'updbs' dataid=request.session.name item=request.session.name %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" class="form-control" id="username" name="username" placeholder="Enter username" style="border-radius: 10%; width: 250px; height: 50px; background-color: #333; color: white; border: none; padding: 10px;" value="{{request.session.name}}" />
+            <input type="file" class="form-control" name="image" style="border-radius: 50px; width: 250px; height: 50px; margin-left: 20px;margin-top: 30px; background-color: #333; color: white; border: none; padding: 10px;" accept="image/*"/>
+            <button class="follow-btn" type="submit" onclick="submitSearchForm()" style="width: 120px; height: 50px;
+             margin-left: 80px; margin-bottom: -120px;border-radius:50px;margin-top:20px;">Add Post</button>
+            <span class="close" onclick="closeadd()">&times;</span>
+        </form>
+        </div>
+
+                <div class="sub-section" onclick="openstatus()">
+                    <i class="fa-solid fa-clapperboard"></i>
+                    <a href="#">Add Status</a>
+                </div>
+
+
+        <div id="addstatus" class="modal left-panel">
+        <!-- Your search input and other elements -->
+        <form method="post" action="{% url 'updbs' dataid=request.session.name item=request.session.name %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" class="form-control" id="" name="username" placeholder="Enter username" style="border-radius: 10%; width: 250px; height: 50px; background-color: #333; color: white; border: none; padding: 10px;" value="{{request.session.name}}" />
+            <input type="file" class="form-control" name="image" style="border-radius: 50px; width: 250px; height: 50px; margin-left: 20px;margin-top: 30px; background-color: #333; color: white; border: none; padding: 10px;" accept="image/*"/>
+            <button class="follow-btn" type="submit" onclick="submitSearchForm()" style="width: 120px; height: 50px;
+             margin-left: 80px; margin-bottom: -120px;border-radius:50px;margin-top:20px;">Add Status</button>
+            <span class="close" onclick="closestatus()">&times;</span>
+        </form>
+        </div>
+
+                <div class="sub-section">
+                    <i class="fa-regular fa-message"></i>
+                    <a href="{% url 'mes' dataid=request.session.name %}">Messages</a>
+                </div>
+                <div class="sub-section" id="hidden2">
+                    <i class="fa-regular fa-heart"></i>
+                    <a href="#">Notification</a>
+                </div>
+                <div class="sub-section" id="hidden1">
+                    <i class="fa-solid fa-square-plus"></i>
+                    <a href="#">Create</a>
+                </div>
+                <div class="sub-section">
+                    <div class="profile-img">
+                        {% for i in per %}
+                        <img src="{{ i.image.url }}" alt="">
+                        {% endfor %}
+                    </div>
+                    {% if request.session.name and user_object %}
+                    <a href="{% url 'profile' dataid=request.session.name item=request.session.name %}">Profile</a>
+                {% endif %}
+                </div>
+                <div class="menu-section " id="hidden">
+                    <i class="fa-solid fa-bars"></i>
+                    <a href="#">More</a>
+                </div>
+            </div>
+
+        </nav>
+
+{% block content %}
+ {% for i in user_objects %}
+   <div class="profile-container">
+            <div class="profile-header">
+                <div class="profile-pic">
+                    <img src="{{ i.image.url }}" alt="Profile Picture">
+                </div>
+                <div class="profile-info">
+                    <h2>{{ i.username }}</h2>
+         <form method="post" action="{% url 'follow' dataid=i.username item=i.username %}">
+        {% csrf_token %}
+        <input type="hidden" name="username" value="{{request.session.name}}">
+        <input type="hidden" name="name" value="{{ i.username }}">
+        <input type="hidden" name="follower" value="1">
+                    <div class="profile-stats">
+                        {% with total_posts=datas.count %}
+                        <span><strong>{{ total_posts }}</strong> Posts</span>
+                        {% endwith %}
+                        {% with total_followers=data.count %}
+                        <span><strong>{{ total_followers }}</strong> Followers</span>
+                        {% endwith %}
+
+                        {% with total_following=followings.count %}
+                        <span><strong>{{ total_following }}</strong> Following</span>
+                        {% endwith %}
+                    </div>
+                    {% if is_following %}
+                    <button class="follow-btn">UnFollow</button>
+                    {% else %}
+                    <button class="follow-btn">Follow</button>
+                    {% endif %}
+         </form>
+                    <form method="get" action="{% url 'message' dataid=i.username %}">
+                    <button class="follow-btn">Message</button>
+                    </form>
+                </div>
+            </div>
+            <div class="profile-posts">
+                {% for item in datas %}
+                {% if item.image %}
+                <div class="post">
+                    <img src="{{item.image.url}}" alt="Post Image">
+                </div>
+                {% endif %}
+                {% endfor %}
+                <!-- Add more posts as needed -->
+            </div>
+        </div>
+ {% endfor %}
+<script>
+
+    function openstatus() {
+        document.getElementById("addstatus").style.display = "block";
+    }
+    function closestatus() {
+        document.getElementById("addstatus").style.display = "none";
+    }
+    function openadd() {
+        document.getElementById("addModal").style.display = "block";
+    }
+       function closeadd() {
+        document.getElementById("addModal").style.display = "none";
+    }
+    function openSearchModal() {
+        var modal = document.getElementById("searchModal");
+        modal.style.display = "block";
+        modal.style.visibility = "visible";
+    }
+
+    function closeModal() {
+    document.getElementById("searchModal").style.display = "none";
+    }
+</script>
+    {% endblock %}
+
+
+</body>
+</html>
