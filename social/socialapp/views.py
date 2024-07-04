@@ -107,7 +107,7 @@ def profile(request,dataid,item):
         if request.session.get('name'):
             username = request.session['name']
             user_object = logindb.objects.get(username=username)
-        return render(request, 'profil.html', {"data":data,"datas":datas,"follow":follow, "user_object": user_object})
+        return render(request, 'profile.html', {"data":data,"datas":datas,"follow":follow, "user_object": user_object})
 
 
 def message(request, dataid):
